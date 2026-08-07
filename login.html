@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MSRTC Startup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #bbccbb; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .bus-photo {
+            width: 150px; 
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3)); 
+        }
+
+        .welcome-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d32f2f; 
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .login-btn {
+            background-color: #e57373; 
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .lang-container {
+            position: fixed; 
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background-color: white;
+            color: #333;
+            border: 2px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .lang-menu {
+            display: none; 
+            position: absolute;
+            top: 100%; 
+            right: 0;
+            margin-top: 10px; 
+            min-width: 110px;
+            flex-direction: column; 
+            gap: 8px; 
+            z-index: 1000;
+        }
+
+        .lang-menu a {
+            background-color: white; 
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block; 
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px; 
+            border: 1px solid #ccc; 
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2); 
+        }
+
+        .lang-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .password-container {
+            position: relative; 
+            width: 100%; 
+            margin-bottom: 15px;
+        }
+
+        .password-container input {
+            padding-right: 40px; 
+            margin-bottom: 0;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px; 
+            top: 50%;
+            transform: translateY(-50%); 
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .otp-box {
+            width: 120px !important;
+            padding: 10px !important;
+            font-size: 20px !important;
+            text-align: center;
+            border: 2px solid #4CAF50 !important;
+            border-radius: 6px !important;
+            letter-spacing: 5px; 
+            font-weight: bold;
+            margin: 10px auto !important;
+            display: block;
+        }
+
+        .next-btn {
+            background-color: #2196F3; 
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- लँग्वेज बटण -->
+    <div class="lang-container">
+        <button class="lang-btn" onclick="toggleLangMenu(event)">🌐 Language</button>
+        <div id="langMenu" class="lang-menu">
+            <a href="#">मराठी</a>
+            <a href="#">हिंदी</a>
+            <a href="#">English</a>
+        </div>
+    </div>
+
+    <img src="login.png" class="bus-photo">
+    
+    <div class="welcome-text">आपलं स्वागत आहे! 🙏</div>
+    
+    <div class="login-box">
+       <!-- फक्त नंबर आणि पासवर्ड (लॉगिनसाठी) -->
+       <input type="tel" placeholder="मोबाईल नंबर टाका" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+       
+       <div class="password-container">
+           <input type="password" id="passInput" placeholder="पासवर्ड टाका">
+           <span class="eye-icon" onclick="togglePassword()">👁️</span>
+       </div>
+       
+       <button class="login-btn" onclick="sendOTP()">Login</button>
+      
+       <!-- OTP सेक्शन -->
+       <div id="otpSection" style="display: none; margin-top: 20px; text-align: center;">
+           <p style="font-size: 14px; color: green; font-weight: bold;">तुमच्या मोबाईलवर OTP पाठवला आहे!</p>
+           <input type="tel" id="otpInput" maxlength="4" placeholder="OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="otp-box">
+           <br>
+           <button class="next-btn" onclick="goToIndex()">Next</button>
+       </div>
+
+       <!-- नवीन खाते तयार करण्यासाठी लिंक -->
+       <div style="margin-top: 20px; font-size: 15px;">
+           खाते नाहीये? <span style="color: #2196F3; font-weight: bold; cursor: pointer; text-decoration: underline;" onclick="window.location.href='registration.html'">येथे नोंदणी करा</span>
+       </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleLangMenu(event) {
+            event.stopPropagation(); 
+            var menu = document.getElementById("langMenu");
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+        }
+
+        window.onclick = function() {
+            var dropdown = document.getElementById("langMenu");
+            if (dropdown && dropdown.style.display === "flex") {
+                dropdown.style.display = "none";
+            }
+        }
+
+        function togglePassword() {
+            var passBox = document.getElementById("passInput");
+            var eyeIcon = document.querySelector(".eye-icon");
+            if (passBox.type === "password") {
+                passBox.type = "text"; 
+                eyeIcon.innerText = "🙈"; 
+            } else {
+                passBox.type = "password"; 
+                eyeIcon.innerText = "👁️"; 
+            }
+        }
+
+        function sendOTP() {
+            document.getElementById("otpSection").style.display = "block";
+            alert("तुमच्या नंबरवर ४ अंकी OTP पाठवला आहे"); 
+        }
+
+        function goToIndex() {
+            var otp = document.getElementById("otpInput").value;
+            if(otp.length === 4) {
+                window.location.href = "index.html"; 
+            } else {
+                alert("कृपया पूर्ण ४ अंकी OTP टाका!"); 
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MSRTC Startup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #bbccbb; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* बसच्या फोटोची डिझाईन */
+        .bus-photo {
+            width: 150px; 
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3)); 
+        }
+
+        /* स्वागत संदेशाची डिझाईन */
+        .welcome-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d32f2f; 
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        /* रजिस्ट्रेशन बॉक्सची डिझाईन */
+        .login-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* नाव, मोबाईल नंबर आणि पासवर्ड टाकण्याची जागा */
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* रजिस्टर बटण */
+        .login-btn {
+            background-color: #e57373; 
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* लँग्वेज बटण फिक्स करण्यासाठी */
+        .lang-container {
+            position: fixed; 
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background-color: white;
+            color: #333;
+            border: 2px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* लिस्टचा मुख्य भाग */
+        .lang-menu {
+            display: none; 
+            position: absolute;
+            top: 100%; 
+            right: 0;
+            margin-top: 10px; 
+            min-width: 110px;
+            flex-direction: column; 
+            gap: 8px; 
+            z-index: 1000;
+        }
+
+        /* लिस्ट मधली ३ वेगवेगळी बटणे */
+        .lang-menu a {
+            background-color: white; 
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block; 
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px; 
+            border: 1px solid #ccc; 
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2); 
+        }
+
+        .lang-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* पासवर्ड बॉक्सचा कंटेनर */
+        .password-container {
+            position: relative; 
+            width: 100%; 
+            margin-bottom: 15px;
+        }
+
+        /* पासवर्ड टाईप करण्याचा बॉक्स */
+        .password-container input {
+            padding-right: 40px; 
+            margin-bottom: 0;
+        }
+
+        /* डोळ्याचा आयकॉन */
+        .eye-icon {
+            position: absolute;
+            right: 15px; 
+            top: 50%;
+            transform: translateY(-50%); 
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* OTP बॉक्सची डिझाईन */
+        .otp-box {
+            width: 120px !important;
+            padding: 10px !important;
+            font-size: 20px !important;
+            text-align: center;
+            border: 2px solid #4CAF50 !important;
+            border-radius: 6px !important;
+            letter-spacing: 5px; 
+            font-weight: bold;
+            margin: 10px auto !important;
+            display: block;
+        }
+
+        /* Next बटणाची डिझाईन */
+        .next-btn {
+            background-color: #2196F3; 
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .next-btn:hover {
+            background-color: #0b7dda;
+        }
+        
+        /* लॉगिन लिंकची डिझाईन */
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+        }
+        .login-link a {
+            color: #d32f2f;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- लँग्वेज बटण -->
+    <div class="lang-container">
+        <button class="lang-btn" onclick="toggleLangMenu(event)">🌐 Language</button>
+        <div id="langMenu" class="lang-menu">
+            <a href="#">मराठी</a>
+            <a href="#">हिंदी</a>
+            <a href="#">English</a>
+        </div>
+    </div>
+
+    <!-- बसचा फोटो -->
+    <img src="login.png" class="bus-photo">
+    
+    <!-- स्वागत संदेश -->
+    <div class="welcome-text">नवीन खाते तयार करा! 📝</div>
+    
+    <!-- रजिस्ट्रेशन बॉक्स -->
+    <div class="login-box">
+       <!-- पूर्ण नाव टाकण्यासाठी नवीन बॉक्स -->
+       <input type="text" placeholder="तुमचं पूर्ण नाव टाका">
+       
+       <!-- मोबाईल नंबर बॉक्स -->
+       <input type="tel" placeholder="मोबाईल नंबर टाका" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+       
+       <!-- पासवर्ड बॉक्स आणि डोळा -->
+       <div class="password-container">
+           <input type="password" id="passInput" placeholder="पासवर्ड तयार करा">
+           <span class="eye-icon" onclick="togglePassword()">👁️</span>
+       </div>
+       
+       <!-- रजिस्टर बटण -->
+       <button class="login-btn" onclick="sendOTP()">Register</button>
+      
+       <!-- OTP सेक्शन -->
+       <div id="otpSection" style="display: none; margin-top: 20px; text-align: center;">
+           <p style="font-size: 14px; color: green; font-weight: bold;">तुमच्या मोबाईलवर OTP पाठवला आहे!</p>
+           <input type="tel" id="otpInput" maxlength="4" placeholder="OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="otp-box">
+           <br>
+           <!-- OTP टाकून झाल्यावर लॉगिन पेजवर जाण्यासाठी -->
+           <button class="next-btn" onclick="goToLogin()">Next</button>
+       </div>
+       
+       <!-- आधीच खाते असल्यास थेट लॉगिन पेजवर जाण्यासाठी लिंक -->
+      <!-- आधीच खाते असल्यास थेट लॉगिन पेजवर जाण्यासाठी लिंक -->
+       <div class="login-link" style="margin-top: 20px; font-size: 15px;">
+           आधीच खाते आहे? <span style="color: #d32f2f; font-weight: bold; cursor: pointer; text-decoration: underline;" onclick="window.location.href='login.html'">येथे लॉगिन करा</span>
+       </div>
+       </div>
+    </div>
+
+    <!-- सर्व JavaScript कोड -->
+    <script>
+        function toggleLangMenu(event) {
+            event.stopPropagation(); 
+            var menu = document.getElementById("langMenu");
+            
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+        }
+
+        window.onclick = function() {
+            var dropdown = document.getElementById("langMenu");
+            if (dropdown && dropdown.style.display === "flex") {
+                dropdown.style.display = "none";
+            }
+        }
+
+        function togglePassword() {
+            var passBox = document.getElementById("passInput");
+            var eyeIcon = document.querySelector(".eye-icon");
+
+            if (passBox.type === "password") {
+                passBox.type = "text"; 
+                eyeIcon.innerText = "🙈"; 
+            } else {
+                passBox.type = "password"; 
+                eyeIcon.innerText = "👁️"; 
+            }
+        }
+
+        function sendOTP() {
+            document.getElementById("otpSection").style.display = "block";
+            alert("तुमच्या नंबरवर ४ अंकी OTP पाठवला आहे: 1234"); 
+        }
+
+// OTP टाकल्यावर Next दाबल्यास थेट index.html उघडेल
+        function goToLogin() {
+            var otp = document.getElementById("otpInput").value;
+            
+            if(otp.length === 4) {
+                // कोणताही मेसेज न येता डायरेक्ट index.html फाईल उघडेल
+                window.location.href = "index.html"; 
+            } else {
+                alert("कृपया पूर्ण ४ अंकी OTP टाका!"); 
+            }
+        }
+        </script>
+</body>
+</html>

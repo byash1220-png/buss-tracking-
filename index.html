@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSRTC Bus Tracking</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            /* तुझा जुना ग्रॅडिएंट थोडा सॉफ्ट केला आहे जेणेकरून तो डोळ्यांना छान दिसेल */
+            background: linear-gradient(135deg, #ffb3b3, #b3ffb3, #b3d9ff);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 25px; /* बटणांमधील अंतर */
+        }
+
+        /* सर्व साधारण बटणांसाठी एकच स्टाईल (Search, Time Table, Profile) */
+        .menu-btn {
+            background-color: white; 
+            color: #d32f2f;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 240px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        /* प्रीमियम मेंबरशिप बटण */
+        .premium-btn {
+            background: linear-gradient(135deg, #ffd54f, #ffca28);
+            color: #333;
+            padding: 20px;
+            border: none;
+            border-radius: 20px;
+            width: 280px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .premium-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .premium-btn .old-price {
+            text-decoration: line-through;
+            color: #d32f2f;
+            font-size: 15px;
+            margin-right: 10px;
+        }
+
+        .premium-btn .new-price {
+            color: #2e7d32;
+            font-size: 24px;
+        }
+
+        .premium-btn .desc {
+            font-size: 13px;
+            font-weight: normal;
+            display: block;
+            margin-top: 8px;
+            color: #555;
+        }
+
+        /* बॅक बटण */
+        .back-btn {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            background: white(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 40%;
+            width: 60px;
+            height: 30px;
+            font-size: 47px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                        display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 0; 
+            padding-bottom: 16px; /* जर बाण अजूनही थोडा खाली वाटत असेल, तर हे व्हॅल्यू कमी जास्त करू शकतोस */   transition: 0.3s;
+         }
+
+        .back-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Back Button -->
+    <button class="back-btn" onclick="window.location.href='login.html'">&#8592;</button>
+
+    <!-- Menu Buttons -->
+    <button class="menu-btn" onclick="window.location.href='search.html'">Search Buses</button>
+    <button class="menu-btn" onclick="window.location.href='time.html'">Time Table</button>
+    <button class="menu-btn" onclick="window.location.href='profile.html'">My Profile</button>
+    
+    <!-- Premium Button -->
+    <button class="premium-btn">
+        Premium Membership<br>
+        <span class="old-price">₹300</span> <span class="new-price">₹100</span><br>
+        <span class="desc">Get Premium to block the ads</span>
+    </button>
+
+</body>
+</html>

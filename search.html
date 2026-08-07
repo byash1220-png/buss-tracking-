@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* मागचे मोठे पेज (बॅकग्राउंड) */
+        body {
+            background-color: #bbccbb; 
+            background-image: url('buss.png'); /* इथे तुझ्या बसच्या फोटोचे नाव टाक */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* छोटी स्क्रीन (Transparent आणि Blur इफेक्ट) */
+        .small-screen {
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            padding: 20px;
+            border-radius: 15px;
+            width: 250px;
+            box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3); 
+            text-align: center;
+        }
+
+        /* नावे आणि टाईप करण्यासाठी बॉक्सची डिझाईन */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 14px; 
+            color: #000; 
+            margin-bottom: 5px;
+            font-weight: 900;
+        }
+
+        .input-group input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.8); 
+        }
+
+        /* दोन बॉक्सच्या मधला एक्सचेंज बाण */
+        .exchange-icon {
+            font-size: 24px;
+            color: #000;
+            margin: 5px 0;
+            font-weight: bold;
+            cursor: pointer; 
+            transition: transform 0.2s; 
+        }
+
+        /* क्लिक केल्यावर बाण थोडा दाबला गेल्यासारखा दिसेल */
+        .exchange-icon:active {
+            transform: scale(0.8);
+        }
+
+        /* नवीन Search my bus बटनची डिझाईन */
+        .search-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            background-color: #007BFF; /* निळा रंग */
+            color: white;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.1s;
+        }
+
+        .search-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* छोट्या स्क्रीनच्या खालची बटणे */
+        .action-btn {
+            width: 290px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .book-btn { background-color: #4CAF50; color: white; }
+        .view-btn { background-color: #FF9800; color: white; }
+    </style>
+    <style>
+    /* बॅक बटण (index.html वर जाण्यासाठी) */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 40%;
+            width: 60px;
+            height: 30px;
+            font-size: 47px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 0;
+            padding-bottom: 16px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        </style>
+</head>
+<body>
+
+    <!-- छोटी स्क्रीन सुरू -->
+    <div class="small-screen">
+        
+        <!-- पहिले नाव (Select from) -->
+        <div class="input-group">
+            <label>Select from</label>
+            <input type="text" id="fromInput" placeholder="Enter here...">
+        </div>
+
+        <!-- मधला एक्सचेंज बाण (क्लिक केल्यावर swapLocations फंक्शन चालेल) -->
+        <div class="exchange-icon" onclick="swapLocations()">&#8645;</div>
+
+        <!-- दुसरे नाव (Choose destination) -->
+        <div class="input-group">
+            <label>Choose destination</label>
+            <input type="text" id="toInput" placeholder="Enter here...">
+        </div>
+
+        <!-- नवीन Search my bus बटन -->
+        <button class="search-btn">Search my bus</button>
+
+    </div>
+    <!-- छोटी स्क्रीन संपली -->
+
+    <!-- बटणे -->
+    <button class="action-btn book-btn">Book Ticket</button>
+    <button class="action-btn view-btn">View Ticket</button>
+    <!-- Back Button to Index -->
+    <button class="back-btn" onclick="window.location.href='index.html'">&#8592;</button>
+
+    <!-- नावे एक्सचेंज करण्यासाठी JavaScript कोड -->
+    <script>
+        function swapLocations() {
+            // दोन्ही बॉक्स शोधून काढणे
+            let fromBox = document.getElementById("fromInput");
+            let toBox = document.getElementById("toInput");
+
+            // त्यांच्यातली नावे एका जागी सेव्ह करून एकमेकांसोबत बदलणे
+            let tempVal = fromBox.value;
+            fromBox.value = toBox.value;
+            toBox.value = tempVal;
+        }
+    </script>
+
+</body>
+</html>

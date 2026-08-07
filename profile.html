@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffb3b3, #b3ffb3, #b3d9ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* बॅक बटण */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 40%;
+            width: 60px;
+            height: 30px;
+            font-size: 47px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 0;
+            padding-bottom: 16px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        /* प्रोफाइल फोटोची डिझाईन */
+        .profile-container {
+            margin-top: 80px; /* वरून थोडी जागा */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* फोटो बरोबर गोल आकारात बसण्यासाठी */
+        }
+
+        .profile-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* लपवलेला फाईल इनपुट */
+        #fileInput {
+            display: none;
+        }
+
+        /* मेनूची लिस्ट (एकाखाली एक बटणे) */
+        .menu-list {
+            width: 90%;
+            max-width: 350px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* लिस्ट मधली बटणे */
+        .list-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left; /* नाव डाव्या बाजूला दिसावे म्हणून */
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-btn:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .logout-btn {
+            color: #d32f2f; /* लॉगआउट लाल रंगात */
+        }
+
+        /* टाईप करण्यासाठी उघडणारा बॉक्स (सुरुवातीला लपवलेला) */
+        .type-box {
+            display: none; 
+            flex-direction: column;
+            gap: 10px;
+            margin-top: -5px;
+            margin-bottom: 5px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .type-box textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: none;
+            outline: none;
+        }
+
+        .type-box textarea:focus {
+            border-color: #2196F3;
+        }
+
+        .submit-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="window.location.href='index.html'">&#8592;</button>
+
+    <!-- प्रोफाइल फोटो सेक्शन -->
+    <div class="profile-container">
+        <!-- फोटोवर क्लिक केल्यावर गॅलरी उघडण्यासाठी onclick लावलं आहे -->
+        <div class="profile-pic" onclick="document.getElementById('fileInput').click()">
+            <img id="userPhoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Icon">
+        </div>
+        <div class="profile-text">📷 फोटो बदलण्यासाठी क्लिक करा</div>
+        
+        <!-- गॅलरीतून फोटो निवडण्यासाठी (हा बॉक्स लपवलेला असतो) -->
+        <input type="file" id="fileInput" accept="image/*" onchange="previewPhoto(event)">
+    </div>
+
+    <!-- मेनू लिस्ट -->
+    <div class="menu-list">
+        
+        <!-- Help Line -->
+        <button class="list-btn" onclick="toggleBox('helpBox')">Help Line <span>&#9662;</span></button>
+        <div id="helpBox" class="type-box">
+            <textarea placeholder="तुमची समस्या येथे टाईप करा..."></textarea>
+            <button class="submit-btn" onclick="alert('तुमची समस्या पाठवली आहे!')">Submit</button>
+        </div>
+
+        <!-- Suggestions -->
+        <button class="list-btn" onclick="toggleBox('sugBox')">Suggestions <span>&#9662;</span></button>
+        <div id="sugBox" class="type-box">
+            <textarea placeholder="तुमचे अमूल्य विचार येथे टाईप करा..."></textarea>
+            <button class="submit-btn" onclick="alert('तुमचा अभिप्राय पाठवला आहे!')">Submit</button>
+        </div>
+
+        <!-- F&Q -->
+        <button class="list-btn" onclick="alert('लवकरच F&Q अपडेट केले जातील!')">F&Q <span>&#8250;</span></button>
+
+        <!-- Logout -->
+        <button class="list-btn logout-btn" onclick="window.location.href='login.html'">Logout <span>&#8250;</span></button>
+        
+    </div>
+
+    <script>
+        // गॅलरीतून निवडलेला फोटो प्रोफाइल पिक्चर म्हणून सेट करण्यासाठी
+        function previewPhoto(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('userPhoto');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Help Line आणि Suggestions चा बॉक्स उघडणे/बंद करणे
+        function toggleBox(boxId) {
+            var box = document.getElementById(boxId);
+            if (box.style.display === "flex") {
+                box.style.display = "none";
+            } else {
+                box.style.display = "flex";
+            }
+        }
+    </script>
+</body>
+</html>

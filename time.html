@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            /* मुख्य पेजसारखाच बॅकग्राउंड */
+            background: linear-gradient(135deg, #ffb3b3, #b3ffb3, #b3d9ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* बॅक बटण (index.html वर जाण्यासाठी) */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 40%;
+            width: 60px;
+            height: 30px;
+            font-size: 47px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            /* बाणाला एकदम बरोबर मध्यभागी आणण्यासाठी हे ४ कोड महत्त्वाचे आहेत */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 0; 
+            padding-bottom: 16px; /* जर बाण अजूनही थोडा खाली वाटत असेल, तर हे व्हॅल्यू कमी जास्त करू शकतोस */   transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        /* सिलेक्ट बॉक्सेसचा कंटेनर */
+        .form-container {
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* रंगांमधील आणि बॉक्समधील अंतर */
+        }
+
+        /* पहिली ओळ (दोन बॉक्स एका रेषेत) */
+        .row-one {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 15px;
+        }
+
+        /* सिलेक्ट बॉक्सची डिझाईन */
+        select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid white;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            appearance: none; /* डीफॉल्ट ॲरो लपवण्यासाठी */
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #d32f2f;
+            background-color: white;
+        }
+
+        /* ३ रा बॉक्स (मधोमध) */
+        .village-select {
+            width: 50%; /* याला थोडा लहान ठेवलाय जेणेकरून तो मध्यभागी छान दिसेल */
+        }
+
+        /* Get Time Table बटण */
+        .get-btn {
+            margin-top: 50px; /* तू सांगितल्याप्रमाणे जास्त गॅप (Gap) */
+            background-color: #d32f2f;
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 80%;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(211, 47, 47, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .get-btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(211, 47, 47, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button to Index -->
+    <button class="back-btn" onclick="window.location.href='index.html'">&#8592;</button>
+
+    <div class="form-container">
+        <!-- पहिले २ बटण / सिलेक्ट बॉक्स एका रेषेत -->
+        <div class="row-one">
+            <select id="district">
+                <option value="">Select District</option>
+                <option value="pune">Pune</option>
+                <option value="mumbai">Mumbai</option>
+                <!-- इथे तू तुझे जिल्हे टाकू शकतोस -->
+            </select>
+
+            <select id="sub-district">
+                <option value="">Select Sub-District</option>
+                <option value="haveli">Haveli</option>
+                <option value="khed">Khed</option>
+                <!-- इथे तालुके येतील -->
+            </select>
+        </div>
+
+        <!-- ३ रा सिलेक्ट बॉक्स (पहिल्या दोनच्या मध्ये आणि खाली) -->
+        <select id="village" class="village-select">
+            <option value="">Select Village</option>
+            <option value="wagholi">Wagholi</option>
+            <option value="katraj">Katraj</option>
+            <!-- इथे गावाची नावे येतील -->
+        </select>
+
+        <!-- ४ थे बटण (जास्त गॅप देऊन खाली) -->
+        <button class="get-btn">Get Time Table</button>
+    </div>
+
+</body>
+</html>

@@ -191,7 +191,7 @@
            <p style="font-size: 14px; color: green; font-weight: bold;">तुमच्या मोबाईलवर OTP पाठवला आहे!</p>
            <input type="tel" id="otpInput" maxlength="4" placeholder="OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="otp-box">
            <br>
-           <button class="next-btn" onclick="goToIndex()">Next</button>
+           <button class="next-btn" onclick="goToHome()">Next</button>
        </div>
 
        <!-- नवीन खाते तयार करण्यासाठी लिंक -->
@@ -239,7 +239,7 @@
         function goToIndex() {
             var otp = document.getElementById("otpInput").value;
             if(otp.length === 4) {
-                window.location.href = "index.html"; 
+                window.location.href = "home.html"; 
             } else {
                 alert("कृपया पूर्ण ४ अंकी OTP टाका!"); 
             }

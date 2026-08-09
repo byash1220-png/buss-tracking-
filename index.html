@@ -209,11 +209,11 @@
     
     <!-- रजिस्ट्रेशन बॉक्स -->
     <div class="login-box">
-       <!-- पूर्ण नाव टाकण्यासाठी नवीन बॉक्स -->
-       <input type="text" placeholder="तुमचं पूर्ण नाव टाका">
+       <!-- पूर्ण नाव टाकण्यासाठी नवीन बॉक्स (येथे id="nameInput" दिला आहे) -->
+       <input type="text" id="nameInput" placeholder="तुमचं पूर्ण नाव टाका">
        
        <!-- मोबाईल नंबर बॉक्स -->
-       <input type="tel" placeholder="मोबाईल नंबर टाका" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+       <input type="tel" id="mobileInput" placeholder="मोबाईल नंबर टाका" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
        
        <!-- पासवर्ड बॉक्स आणि डोळा -->
        <div class="password-container">
@@ -227,17 +227,15 @@
        <!-- OTP सेक्शन -->
        <div id="otpSection" style="display: none; margin-top: 20px; text-align: center;">
            <p style="font-size: 14px; color: green; font-weight: bold;">तुमच्या मोबाईलवर OTP पाठवला आहे!</p>
-           <input type="tel" id="otpInput" maxlength="4" placeholder="OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="otp-box">
+           <input type="tel" id="otpInput" class="otp-box" placeholder="OTP" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
            <br>
-           <!-- OTP टाकून झाल्यावर लॉगिन पेजवर जाण्यासाठी -->
-           <button class="next-btn" onclick="goToLogin()">Next</button>
+           <!-- OTP टाकून झाल्यावर होम पेजवर जाण्यासाठी -->
+           <button class="next-btn" onclick="goToHome()">Next</button>
        </div>
        
        <!-- आधीच खाते असल्यास थेट लॉगिन पेजवर जाण्यासाठी लिंक -->
-      <!-- आधीच खाते असल्यास थेट लॉगिन पेजवर जाण्यासाठी लिंक -->
        <div class="login-link" style="margin-top: 20px; font-size: 15px;">
            आधीच खाते आहे? <span style="color: #d32f2f; font-weight: bold; cursor: pointer; text-decoration: underline;" onclick="window.location.href='login.html'">येथे लॉगिन करा</span>
-       </div>
        </div>
     </div>
 
@@ -274,22 +272,46 @@
             }
         }
 
+        // पूर्ण माहिती चेक करून OTP पाठवणारे फंक्शन
         function sendOTP() {
-            document.getElementById("otpSection").style.display = "block";
-            alert("तुमच्या नंबरवर ४ अंकी OTP पाठवला आहे: 1234"); 
+            // तिन्ही बॉक्सेस मधील माहिती वाचणे
+            var name = document.getElementById("nameInput").value;
+            var mobileNo = document.getElementById("mobileInput").value;
+            var pass = document.getElementById("passInput").value;
+            
+            // १. नाव रिकामं असेल तर
+            if (name.trim() === "") {
+                alert("कृपया तुमचं पूर्ण नाव टाका!");
+            } 
+            // २. मोबाईल नंबर रिकामा असेल तर
+            else if (mobileNo === "") {
+                alert("कृपया मोबाईल नंबर टाका!");
+            } 
+            // ३. मोबाईल नंबर १० अंकी नसेल तर
+            else if (mobileNo.length < 10) {
+                alert("कृपया पूर्ण १० अंकी मोबाईल नंबर टाका!");
+            } 
+            // ४. पासवर्ड रिकामा असेल तर
+            else if (pass.trim() === "") {
+                alert("कृपया तुमचा पासवर्ड तयार करा!");
+            }
+            // ५. सगळी माहिती बरोबर भरलेली असेल तरच OTP पाठवा
+            else {
+                document.getElementById("otpSection").style.display = "block";
+                alert("तुमच्या नंबरवर ४ अंकी OTP पाठवला आहे: 1234"); 
+            }
         }
 
-// OTP टाकल्यावर Next दाबल्यास थेट index.html उघडेल
-        function goToLogin() {
+        // OTP बरोबर असल्यास home.html उघडणारे फंक्शन
+        function goToHome() {
             var otp = document.getElementById("otpInput").value;
             
             if(otp.length === 4) {
-                // कोणताही मेसेज न येता डायरेक्ट index.html फाईल उघडेल
-                window.location.href = "index.html"; 
+                window.location.href = "home.html"; 
             } else {
                 alert("कृपया पूर्ण ४ अंकी OTP टाका!"); 
             }
         }
-        </script>
+    </script>
 </body>
-</html>
+</html>        

@@ -173,6 +173,181 @@
         }
 
         .next-btn:hover {
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MSRTC Startup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #bbccbb; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* बसच्या फोटोची डिझाईन */
+        .bus-photo {
+            width: 150px; 
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3)); 
+        }
+
+        /* स्वागत संदेशाची डिझाईन */
+        .welcome-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d32f2f; 
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        /* रजिस्ट्रेशन बॉक्सची डिझाईन */
+        .login-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* नाव, मोबाईल नंबर आणि पासवर्ड टाकण्याची जागा */
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* रजिस्टर बटण */
+        .login-btn {
+            background-color: #e57373; 
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* लँग्वेज बटण फिक्स करण्यासाठी */
+        .lang-container {
+            position: fixed; 
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background-color: white;
+            color: #333;
+            border: 2px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* लिस्टचा मुख्य भाग */
+        .lang-menu {
+            display: none; 
+            position: absolute;
+            top: 100%; 
+            right: 0;
+            margin-top: 10px; 
+            min-width: 110px;
+            flex-direction: column; 
+            gap: 8px; 
+            z-index: 1000;
+        }
+
+        /* लिस्ट मधली ३ वेगवेगळी बटणे */
+        .lang-menu a {
+            background-color: white; 
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block; 
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px; 
+            border: 1px solid #ccc; 
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2); 
+        }
+
+        .lang-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* पासवर्ड बॉक्सचा कंटेनर */
+        .password-container {
+            position: relative; 
+            width: 100%; 
+            margin-bottom: 15px;
+        }
+
+        /* पासवर्ड टाईप करण्याचा बॉक्स */
+        .password-container input {
+            padding-right: 40px; 
+            margin-bottom: 0;
+        }
+
+        /* डोळ्याचा आयकॉन */
+        .eye-icon {
+            position: absolute;
+            right: 15px; 
+            top: 50%;
+            transform: translateY(-50%); 
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* OTP बॉक्सची डिझाईन */
+        .otp-box {
+            width: 120px !important;
+            padding: 10px !important;
+            font-size: 20px !important;
+            text-align: center;
+            border: 2px solid #4CAF50 !important;
+            border-radius: 6px !important;
+            letter-spacing: 5px; 
+            font-weight: bold;
+            margin: 10px auto !important;
+            display: block;
+        }
+
+        /* Next बटणाची डिझाईन */
+        .next-btn {
+            background-color: #2196F3; 
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .next-btn:hover {
             background-color: #0b7dda;
         }
         
@@ -209,7 +384,7 @@
     
     <!-- रजिस्ट्रेशन बॉक्स -->
     <div class="login-box">
-       <!-- पूर्ण नाव टाकण्यासाठी नवीन बॉक्स (येथे id="nameInput" दिला आहे) -->
+       <!-- पूर्ण नाव टाकण्यासाठी नवीन बॉक्स -->
        <input type="text" id="nameInput" placeholder="तुमचं पूर्ण नाव टाका">
        
        <!-- मोबाईल नंबर बॉक्स -->
@@ -239,30 +414,47 @@
        </div>
     </div>
 
-    <!-- सर्व JavaScript कोड -->
-    <script>
-        function toggleLangMenu(event) {
+    <!-- सर्व JavaScript कोड आणि Firebase बॅकएंड -->
+    <script type="module">
+        // १. Firebase चे टूल्स इम्पोर्ट करणे
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+        // २. तुझा Firebase चा सिक्रेट कोड
+        const firebaseConfig = {
+            apiKey: "AIzaSyApdMerWMeVgZ8jORHV32BuUKBiqgK5iZU",
+            authDomain: "msrtc-live-buss-tracking.firebaseapp.com",
+            projectId: "msrtc-live-buss-tracking",
+            storageBucket: "msrtc-live-buss-tracking.firebasestorage.app",
+            messagingSenderId: "325306053617",
+            appId: "1:325306053617:web:efe2add6517737d3adca50"
+        };
+
+        // ३. Firebase आणि Database चालू करणे
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // ४. जुने डिझाईनचे फंक्शन्स 
+        window.toggleLangMenu = function(event) {
             event.stopPropagation(); 
             var menu = document.getElementById("langMenu");
-            
             if (menu.style.display === "flex") {
                 menu.style.display = "none";
             } else {
                 menu.style.display = "flex";
             }
-        }
+        };
 
         window.onclick = function() {
             var dropdown = document.getElementById("langMenu");
             if (dropdown && dropdown.style.display === "flex") {
                 dropdown.style.display = "none";
             }
-        }
+        };
 
-        function togglePassword() {
+        window.togglePassword = function() {
             var passBox = document.getElementById("passInput");
             var eyeIcon = document.querySelector(".eye-icon");
-
             if (passBox.type === "password") {
                 passBox.type = "text"; 
                 eyeIcon.innerText = "🙈"; 
@@ -270,46 +462,60 @@
                 passBox.type = "password"; 
                 eyeIcon.innerText = "👁️"; 
             }
-        }
+        };
 
-        // पूर्ण माहिती चेक करून OTP पाठवणारे फंक्शन
-        function sendOTP() {
-            // तिन्ही बॉक्सेस मधील माहिती वाचणे
-            var name = document.getElementById("nameInput").value;
-            var mobileNo = document.getElementById("mobileInput").value;
-            var pass = document.getElementById("passInput").value;
-            
-            // १. नाव रिकामं असेल तर
-            if (name.trim() === "") {
-                alert("कृपया तुमचं पूर्ण नाव टाका!");
-            } 
-            // २. मोबाईल नंबर रिकामा असेल तर
-            else if (mobileNo === "") {
-                alert("कृपया मोबाईल नंबर टाका!");
-            } 
-            // ३. मोबाईल नंबर १० अंकी नसेल तर
-            else if (mobileNo.length < 10) {
-                alert("कृपया पूर्ण १० अंकी मोबाईल नंबर टाका!");
-            } 
-            // ४. पासवर्ड रिकामा असेल तर
-            else if (pass.trim() === "") {
-                alert("कृपया तुमचा पासवर्ड तयार करा!");
-            }
-            // ५. सगळी माहिती बरोबर भरलेली असेल तरच OTP पाठवा
-            else {
-                document.getElementById("otpSection").style.display = "block";
-                alert("तुमच्या नंबरवर ४ अंकी OTP पाठवला आहे: 1234"); 
-            }
-        }
-
-        // OTP बरोबर असल्यास home.html उघडणारे फंक्शन
-        function goToHome() {
+        window.goToHome = function() {
             var otp = document.getElementById("otpInput").value;
-            
             if(otp.length === 4) {
                 window.location.href = "home.html"; 
             } else {
                 alert("कृपया पूर्ण ४ अंकी OTP टाका!"); 
+            }
+        };
+
+        // ५. माहिती Firebase Database मध्ये सेव्ह करणारे मुख्य फंक्शन
+        window.sendOTP = async function() {
+            var name = document.getElementById("nameInput").value;
+            var mobileNo = document.getElementById("mobileInput").value;
+            var pass = document.getElementById("passInput").value;
+            
+            if (name.trim() === "") {
+                alert("कृपया तुमचं पूर्ण नाव टाका!");
+            } 
+            else if (mobileNo === "") {
+                alert("कृपया मोबाईल नंबर टाका!");
+            } 
+            else if (mobileNo.length < 10) {
+                alert("कृपया पूर्ण १० अंकी मोबाईल नंबर टाका!");
+            } 
+            else if (pass.trim() === "") {
+                alert("कृपया तुमचा पासवर्ड तयार करा!");
+            }
+            else {
+                try {
+                    // रजिस्टर बटणावर 'Saving...' दाखवण्यासाठी
+                    document.querySelector(".login-btn").innerText = "Saving...";
+
+                    // Users नावाच्या फोल्डरमध्ये माहिती पाठवणे
+                    await addDoc(collection(db, "Users"), {
+                        FullName: name,
+                        MobileNumber: mobileNo,
+                        Password: pass,
+                        Time: new Date()
+                    });
+
+                    // बटण पुन्हा पूर्ववत करणे
+                    document.querySelector(".login-btn").innerText = "Register";
+
+                    // OTP बॉक्स उघडणे
+                    document.getElementById("otpSection").style.display = "block";
+                    alert("माहिती यशस्वीरित्या सेव्ह झाली! तुमच्या नंबरवर ४ अंकी OTP पाठवला आहे: 1234"); 
+                    
+                } catch (e) {
+                    alert("इंटरनेट कनेक्शन तपासा! माहिती सेव्ह होऊ शकली नाही.");
+                    console.error("Firebase Error: ", e);
+                    document.querySelector(".login-btn").innerText = "Register";
+                }
             }
         }
     </script>
